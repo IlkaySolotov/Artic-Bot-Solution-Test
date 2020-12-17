@@ -11,37 +11,37 @@
 /* ɪ ᴋɴᴏᴡ ᴍᴏꜱᴛ ᴏꜰ ᴛʜᴏꜱᴇ ꜰᴏʀᴍᴀᴛᴛɪɴɢ ᴛʏᴘᴇꜱ ᴀʀᴇ ᴄᴏᴍᴘʟᴇᴛᴇʟʏ
     ᴡʀᴏɴɢ, ʙᴜᴛ ɪᴛꜱ ᴍʏ ᴘᴇʀꜱᴏɴᴀʟ ᴡᴀʏ ᴛᴏ ꜰᴏʀᴍᴀᴛ ᴍʏ ᴄᴏᴅᴇ :+) */
 
-using System;
-using System.IO;
-using System.Globalization;
-
-using Newtonsoft.Json;
+using               Telegram.Bot;
+using             Test.Artic.Bot;
+using          Test.Artic.Global;
+using                     System;
+using                  System.IO;
+using       System.Globalization;
+using            Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Test.Artic.Global;
-using Telegram.Bot;
-using Test.Artic.Bot;
-using System.Threading.Tasks;
 
 namespace Test.Artic.JsSettings
 {
     // JSON Serialization / Deserialization Class
     public class Deserialize // same error
     {
-        public TestVariable var;
+        public TestVariable teVar;
+        public Setting self;
         public Deserialize(Start start)
         {
-            var = start.var; // this is not being executed for sm reason (fixed)
+            teVar = start.teVar; // this is not being executed for sm reason (fixed)
+            self = start.set;
             // Define classes and public variables
             // Serialize settings to JSON and write them to JSON file
             // Deserialize settings to be used on restart
-
         }
+   
         public void serialize() // ok, allora, 
         {
             try
             {    
-                File.WriteAllText(var.chatId.ToString(), JsonConvert.SerializeObject(Converter.Settings));
-                Console.WriteLine(File.ReadAllText(var.chatId.ToString()));
+                File.WriteAllText(teVar.chatId.ToString(), JsonConvert.SerializeObject(self, Converter.Settings));
+                Console.WriteLine(File.ReadAllText(teVar.chatId.ToString()));
             }
             catch
             {
@@ -54,13 +54,13 @@ namespace Test.Artic.JsSettings
     
             try
             {                                                          //1259810333 <= should be
-                JsonConvert.DeserializeObject<Setting>(File.ReadAllText(var.chatId.ToString()), Converter.Settings);
+                JsonConvert.DeserializeObject<Setting>(File.ReadAllText(teVar.chatId.ToString()), Converter.Settings);
 
             }
             catch
             {
-                Console.WriteLine(var.chatId);
-                long sex = var.chatId;
+                Console.WriteLine(teVar.chatId);
+                long sex = teVar.chatId;
                 await c.SendTextMessageAsync(sex, " No settings found in Artic DataBase");
             }
         }

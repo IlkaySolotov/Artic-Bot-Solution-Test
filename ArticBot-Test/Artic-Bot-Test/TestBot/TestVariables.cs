@@ -22,7 +22,7 @@ namespace Test.Artic.Global
 
         // Configuration variables 
         public string  token           { get; set; }  // Bot's token
-        public char    cmdPrefix       { get; set; }  // Bot's commands prefix
+        public string  cmdPrefix       { get; set; }  // Bot's commands prefix
         // Chat variables 
         public long    chatId          { get; set; }  // Id              of the chat where message has been sent
         public string  chatDescription { get; set; }  // Description     of the chat where message has been sent 
